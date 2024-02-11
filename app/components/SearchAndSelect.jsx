@@ -13,7 +13,7 @@ const SearchAndSelect = ({
       if (searchResults.results.length > 0) {
         {
           return searchResults.results
-            .slice(0, 4)
+            .slice(0, 3)
             .map((r) => (
               <SearchResultCard
                 givenID={r.id}

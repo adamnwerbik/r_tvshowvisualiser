@@ -19,7 +19,7 @@ const Comparer = () => {
   const [debouncedValue] = useDebounce(searchQuery, 200);
   const [searchResults, setSearchResults] = useState({});
   const [selectedShowsID, setSelectedShowsID] = useState([]);
-  const [selectedShowsData, setselectedShowsData] = useState([]);
+  const [selectedShowsData, setselectedShowsData] = useState({});
 
   function onInputChange(e) {
     console.log("INPUT CHANGED");
@@ -27,11 +27,25 @@ const Comparer = () => {
   }
 
   useEffect(() => {
+    async function fetchAndUpdateData() {
+      const selectedShowsDataKeys = Object.keys(selectedShowsData);
+      selectedShowsID.forEach((obj) => {
+        console.log(obj.name);
+        if (selectedShowsDataKeys.includes(obj.id)) {
+          console.log(`ID: ${obj.id} IS INCLUDED`);
+          // do nothing
+        } else {
+          console.log(`ID: ${obj.id} IS NOT INCLUDED`);
+          //fetch data
+          selectedShowsData[`${obj.id}`] = {
+            data: `${fetchAllSeasonsInfo(obj.id)}`,
+          };
+        }
+      });
+    }
+    fetchAndUpdateData();
+    console.log(selectedShowsData);
     //fetch data for each showID in this
-
-    selectedShowsID.forEach((tvObj) => {
-      if ()
-    });
   }, [selectedShowsID]);
 
   function onSearchResultClick(e) {

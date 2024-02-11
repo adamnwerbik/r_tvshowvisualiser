@@ -7,8 +7,12 @@ const SearchAndSelect = ({
   onInputChange,
   searchResults,
   onSearchResultClick,
+  shouldBeRendered,
 }) => {
   function displaySearchResults() {
+    if (!shouldBeRendered) {
+      return;
+    }
     try {
       if (searchResults.results.length > 0) {
         {
@@ -28,10 +32,9 @@ const SearchAndSelect = ({
             ));
         }
       } else {
-        return "No Results";
       }
     } catch (error) {
-      return "No Results";
+      //return error.toString();
     }
   }
 

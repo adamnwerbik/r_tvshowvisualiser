@@ -45413,7 +45413,7 @@ function convertToChartableData(data) {
   keysOfData.forEach((tvShowID) => {
     const objToAdd = {
       label: data[tvShowID].name,
-      tension: 0.3,
+      tension: 0.25,
       showLine: true,
       borderColor: null,
       backgroundColor: null,

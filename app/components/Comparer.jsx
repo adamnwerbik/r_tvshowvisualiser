@@ -97,6 +97,7 @@ const Comparer = () => {
         onInputChange={onInputChange}
         searchResults={searchResults}
         onSearchResultClick={onSearchResultClick}
+        shouldBeRendered={searchQuery}
       />
       <div className="flex flex-row">
         {selectedShowsID.map((r) => {
@@ -110,10 +111,11 @@ const Comparer = () => {
           );
         })}
       </div>
-
-      <div className="bg-black-300 w-2/3">
-        <MyChart tvshowdata={selectedShowsData}></MyChart>
-      </div>
+      {selectedShowsID.length > 0 && (
+        <div className=" w-2/3">
+          <MyChart tvshowdata={selectedShowsData}></MyChart>
+        </div>
+      )}
     </>
   );
 };

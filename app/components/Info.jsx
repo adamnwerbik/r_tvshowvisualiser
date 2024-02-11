@@ -8,7 +8,7 @@ const Info = () => {
       </h1>
       <br></br>
       <h3 className="text-balance text-center">
-        Search for 2 or more TV Shows and compare their ratings trend across
+        Search for 2 or more TV shows and compare their ratings trend across
         seasons 📈
       </h3>
     </>

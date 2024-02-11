@@ -102,6 +102,7 @@ const Comparer = () => {
         {selectedShowsID.map((r) => {
           return (
             <MiniCard
+              key={r.id}
               name={r.name}
               id={r.id}
               onBtnClick={handleSelectedShowRemove}

@@ -16,6 +16,7 @@ const SearchAndSelect = ({
             .slice(0, 3)
             .map((r) => (
               <SearchResultCard
+                key={r.id}
                 givenID={r.id}
                 name={r.name}
                 image={r.poster_path}

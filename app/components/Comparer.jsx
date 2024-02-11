@@ -6,12 +6,14 @@ import { useState } from "react";
 import LineChart from "./LineChart";
 import { useEffect } from "react";
 import collect from "collect.js";
+import { isDeepStrictEqual } from "util";
 
 //import server actions
 import {
   fetchAllSeasonsInfo,
   fetchResultsOfSearch,
 } from "../serverActions/FetchingData";
+import MiniCard from "./MiniCard";
 
 const Comparer = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -32,13 +34,12 @@ const Comparer = () => {
   function onSearchResultClick(e) {
     setSearchQuery("");
     const idToAdd = e.currentTarget.dataset.ajdi;
+    const nameToAdd = e.currentTarget.dataset.name;
     setSelectedShowsID(
-      collect([...selectedShowsID, idToAdd])
-        .unique()
+      collect([...selectedShowsID, { id: idToAdd, name: nameToAdd }])
+        .unique("id")
         .all()
     );
-
-    console.log(selectedShowsID);
   }
 
   //change search results based on debounced query
@@ -54,6 +55,14 @@ const Comparer = () => {
 
   //FETCH DATA
 
+  function handleSelectedShowRemove(e) {
+    const showIDToRemove = e.currentTarget.dataset.id;
+    console.log(`showIDToRemove: ${showIDToRemove}: shows ${selectedShowsID}`);
+    setSelectedShowsID(
+      collect([...selectedShowsID]).where("id", "!==", showIDToRemove)
+    );
+  }
+
   return (
     <>
       <h1>Comparer</h1>
@@ -62,7 +71,17 @@ const Comparer = () => {
         searchResults={searchResults}
         onSearchResultClick={onSearchResultClick}
       />
-      <p>Currently selected: {selectedShowsID}</p>
+      <div className="flex flex-row">
+        {selectedShowsID.map((r) => {
+          return (
+            <MiniCard
+              name={r.name}
+              id={r.id}
+              onBtnClick={handleSelectedShowRemove}
+            ></MiniCard>
+          );
+        })}
+      </div>
 
       <LineChart />
     </>

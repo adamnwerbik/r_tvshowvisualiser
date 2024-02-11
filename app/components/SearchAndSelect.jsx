@@ -8,7 +8,7 @@ const SearchAndSelect = ({
   searchResults,
   onSearchResultClick,
 }) => {
-  function searchResultsAnalyse() {
+  function displaySearchResults() {
     try {
       if (searchResults.results.length > 0) {
         {
@@ -38,7 +38,7 @@ const SearchAndSelect = ({
     <>
       <h1>Search && Select</h1>
       <SearchForm onInputChange={onInputChange} />
-      <>{searchResultsAnalyse()}</>
+      <>{displaySearchResults()}</>
     </>
   );
 };

@@ -29,7 +29,8 @@ const Comparer = () => {
   useEffect(() => {
     async function fetchAndUpdateData() {
       const selectedShowsDataKeys = Object.keys(selectedShowsData);
-      selectedShowsID.forEach((obj) => {
+
+      selectedShowsID.forEach(async (obj) => {
         console.log(obj.name);
         if (selectedShowsDataKeys.includes(obj.id)) {
           console.log(`ID: ${obj.id} IS INCLUDED`);
@@ -37,16 +38,20 @@ const Comparer = () => {
         } else {
           console.log(`ID: ${obj.id} IS NOT INCLUDED`);
           //fetch data
-          selectedShowsData[`${obj.id}`] = {
-            data: `${fetchAllSeasonsInfo(obj.id)}`,
-          };
+          const fetchedData = await fetchAllSeasonsInfo(obj.id);
+          console.log("FETCHED DATA:");
+          console.log(fetchedData);
+          //selectedShowsData[`${obj.id}`] = {
+          //  data: await fetchAllSeasonsInfo(obj.id),
+          //};
+          selectedShowsData[obj.id] = { name: obj.name, data: fetchedData };
         }
       });
     }
 
     fetchAndUpdateData();
-
     console.log(selectedShowsData);
+
     //fetch data for each showID in this
   }, [selectedShowsID]);
 
@@ -67,7 +72,7 @@ const Comparer = () => {
       //console.log(`myEffectJustRan: ${debouncedValue}`);
       const results = await fetchResultsOfSearch(debouncedValue);
       setSearchResults(results);
-      console.log(results);
+      //console.log(results);
     }
     changeSearchResults();
   }, [debouncedValue]);

@@ -3,7 +3,7 @@ import { useDebounce } from "use-debounce";
 import React from "react";
 import SearchAndSelect from "./SearchAndSelect";
 import { useState } from "react";
-import LineChart from "./LineChart";
+import Chart from "./LineChart";
 import { useEffect } from "react";
 import collect from "collect.js";
 
@@ -43,7 +43,9 @@ const Comparer = () => {
         }
       });
     }
+
     fetchAndUpdateData();
+
     console.log(selectedShowsData);
     //fetch data for each showID in this
   }, [selectedShowsID]);
@@ -80,6 +82,8 @@ const Comparer = () => {
         .where("id", "!==", showIDToRemove)
         .toArray()
     );
+
+    delete selectedShowsData[showIDToRemove];
   }
 
   return (
@@ -102,7 +106,7 @@ const Comparer = () => {
         })}
       </div>
 
-      <LineChart />
+      <Chart tvshowdata="[1, 2, 3, 4, 5]" />
     </>
   );
 };

@@ -1,6 +1,5 @@
 import React from "react";
 import SearchForm from "./SearchForm";
-import LineChart from "./LineChart";
 import SearchResultCard from "./SearchResultCard";
 
 const SearchAndSelect = ({

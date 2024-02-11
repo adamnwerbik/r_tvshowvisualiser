@@ -45385,6 +45385,8 @@ const exampleData = {
 };
 
 const options = {
+  responsive: true,
+  maintainAspectRatio: true,
   elements: { line: { borderWidth: 2, borderDash: [1, 0] } },
   scales: {
     y: {
@@ -45442,13 +45444,18 @@ function convertToChartableData(data) {
 const MyChart = ({ tvshowdata }) => {
   try {
     const data = {
-      labels: [...Array(100).keys()].slice(1),
+      labels: [...Array(1000).keys()].slice(1),
       datasets: convertToChartableData(tvshowdata),
     };
 
     return (
       <>
-        <Scatter data={data} options={options} plugins={[chartTrendline]} />
+        <Scatter
+          data={data}
+          options={options}
+          plugins={[chartTrendline]}
+          //className=""
+        />
       </>
     );
   } catch (error) {}

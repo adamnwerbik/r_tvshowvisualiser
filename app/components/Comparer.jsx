@@ -112,7 +112,7 @@ const Comparer = () => {
         })}
       </div>
       {selectedShowsID.length > 0 && (
-        <div className=" w-2/3">
+        <div className="w-screen md:w-2/3">
           <MyChart tvshowdata={selectedShowsData}></MyChart>
         </div>
       )}

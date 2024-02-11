@@ -3,7 +3,7 @@ import React from "react";
 const Info = () => {
   return (
     <>
-      <h1 className="text-balance text-center">
+      <h1 className="text-balance text-center ">
         Compare TV Show Ratings Over Time 📺
       </h1>
       <br></br>

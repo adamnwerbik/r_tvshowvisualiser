@@ -23,9 +23,9 @@ const SearchResultCard = ({
       />
       <div className="flex flex-col justify-between p-4">
         <h5 className="flex mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-          {givenID} - {name} - ({parseFloat(rating).toPrecision(2)})
+          {name} - ({parseFloat(rating).toPrecision(2)})
         </h5>
-        <p>{blurb.slice(0, 200) + "..."}</p>
+        <p className="line-clamp-3">{blurb}</p>
         <p className="mb-2 text-right ">{firstAired.split("-")[0]}</p>
       </div>
     </div>

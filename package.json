@@ -1,0 +1,35 @@
+{
+  "name": "r_tvshowvisualiser",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "chart.js": "^4.4.1",
+    "chartjs-plugin-trendline": "^2.1.0",
+    "collect.js": "^4.36.1",
+    "faker": "5.5.3",
+    "flowbite": "^2.2.1",
+    "html-escaper": "^3.0.3",
+    "json-server": "^1.0.0-alpha.23",
+    "next": "14.1.0",
+    "react": "^18",
+    "react-chartjs-2": "^5.2.0",
+    "react-dom": "^18",
+    "react-id-generator": "^3.0.2",
+    "themoviedb-javascript-library": "^3.0.3",
+    "use-debounce": "^10.0.0",
+    "zustand": "^4.5.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.0.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.1.0",
+    "postcss": "^8",
+    "tailwindcss": "^3.3.0"
+  }
+}

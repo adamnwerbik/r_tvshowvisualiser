@@ -79,4 +79,5 @@ export async function fetchAllSeasonsInfo(id) {
   for (let i = 1; i < numberOfSeasons + 1; i++) {
     allSeasonInfo.push(await fetchSeasonInfoForASeries(id, i.toString()));
   }
+  return allSeasonInfo;
 }

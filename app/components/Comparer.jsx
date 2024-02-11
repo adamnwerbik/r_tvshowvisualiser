@@ -6,7 +6,6 @@ import { useState } from "react";
 import LineChart from "./LineChart";
 import { useEffect } from "react";
 import collect from "collect.js";
-import { isDeepStrictEqual } from "util";
 
 //import server actions
 import {
@@ -28,7 +27,11 @@ const Comparer = () => {
   }
 
   useEffect(() => {
-    console.log("ADDED");
+    //fetch data for each showID in this
+
+    selectedShowsID.forEach((tvObj) => {
+      if ()
+    });
   }, [selectedShowsID]);
 
   function onSearchResultClick(e) {
@@ -38,7 +41,7 @@ const Comparer = () => {
     setSelectedShowsID(
       collect([...selectedShowsID, { id: idToAdd, name: nameToAdd }])
         .unique("id")
-        .all()
+        .toArray()
     );
   }
 
@@ -59,7 +62,9 @@ const Comparer = () => {
     const showIDToRemove = e.currentTarget.dataset.id;
     console.log(`showIDToRemove: ${showIDToRemove}: shows ${selectedShowsID}`);
     setSelectedShowsID(
-      collect([...selectedShowsID]).where("id", "!==", showIDToRemove)
+      collect([...selectedShowsID])
+        .where("id", "!==", showIDToRemove)
+        .toArray()
     );
   }
 

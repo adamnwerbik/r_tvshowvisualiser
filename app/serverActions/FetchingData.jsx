@@ -74,14 +74,6 @@ export async function fetchSeasonInfoForASeries(id, season) {
 
 // fetch all seasons info for a given TV show
 export async function fetchAllSeasonsInfo(id) {
-  const options = {
-    next: { revalidate: 604800 }, // cache for a week
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization: "Bearer " + process.env.TMDB_API_KEY,
-    },
-  };
   const numberOfSeasons = parseInt(await fetchNumOfSeasons(id));
   const allSeasonInfo = [];
   for (let i = 1; i < numberOfSeasons + 1; i++) {

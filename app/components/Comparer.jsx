@@ -3,10 +3,9 @@ import { useDebounce } from "use-debounce";
 import React from "react";
 import SearchAndSelect from "./SearchAndSelect";
 import { useState } from "react";
-import LineChart from "./LineChart";
+import MyChart from "./Chart";
 import { useEffect } from "react";
 import collect from "collect.js";
-import { isDeepStrictEqual } from "util";
 
 //import server actions
 import {
@@ -20,7 +19,7 @@ const Comparer = () => {
   const [debouncedValue] = useDebounce(searchQuery, 200);
   const [searchResults, setSearchResults] = useState({});
   const [selectedShowsID, setSelectedShowsID] = useState([]);
-  const [selectedShowsData, setselectedShowsData] = useState([]);
+  const [selectedShowsData, setselectedShowsData] = useState({});
 
   function onInputChange(e) {
     console.log("INPUT CHANGED");
@@ -28,7 +27,32 @@ const Comparer = () => {
   }
 
   useEffect(() => {
-    console.log("ADDED");
+    async function fetchAndUpdateData() {
+      const selectedShowsDataKeys = Object.keys(selectedShowsData);
+
+      selectedShowsID.forEach(async (obj) => {
+        console.log(obj.name);
+        if (selectedShowsDataKeys.includes(obj.id)) {
+          console.log(`ID: ${obj.id} IS INCLUDED`);
+          // do nothing
+        } else {
+          console.log(`ID: ${obj.id} IS NOT INCLUDED`);
+          //fetch data
+          const fetchedData = await fetchAllSeasonsInfo(obj.id);
+          console.log("FETCHED DATA:");
+          console.log(fetchedData);
+          //selectedShowsData[`${obj.id}`] = {
+          //  data: await fetchAllSeasonsInfo(obj.id),
+          //};
+          selectedShowsData[obj.id] = { name: obj.name, data: fetchedData };
+        }
+      });
+    }
+
+    fetchAndUpdateData();
+    console.log(selectedShowsData);
+
+    //fetch data for each showID in this
   }, [selectedShowsID]);
 
   function onSearchResultClick(e) {
@@ -38,17 +62,17 @@ const Comparer = () => {
     setSelectedShowsID(
       collect([...selectedShowsID, { id: idToAdd, name: nameToAdd }])
         .unique("id")
-        .all()
+        .toArray()
     );
   }
 
   //change search results based on debounced query
   useEffect(() => {
     async function changeSearchResults() {
-      console.log(`myEffectJustRan: ${debouncedValue}`);
+      //console.log(`myEffectJustRan: ${debouncedValue}`);
       const results = await fetchResultsOfSearch(debouncedValue);
       setSearchResults(results);
-      console.log(results);
+      //console.log(results);
     }
     changeSearchResults();
   }, [debouncedValue]);
@@ -59,13 +83,16 @@ const Comparer = () => {
     const showIDToRemove = e.currentTarget.dataset.id;
     console.log(`showIDToRemove: ${showIDToRemove}: shows ${selectedShowsID}`);
     setSelectedShowsID(
-      collect([...selectedShowsID]).where("id", "!==", showIDToRemove)
+      collect([...selectedShowsID])
+        .where("id", "!==", showIDToRemove)
+        .toArray()
     );
+
+    delete selectedShowsData[showIDToRemove];
   }
 
   return (
     <>
-      <h1>Comparer</h1>
       <SearchAndSelect
         onInputChange={onInputChange}
         searchResults={searchResults}
@@ -75,6 +102,7 @@ const Comparer = () => {
         {selectedShowsID.map((r) => {
           return (
             <MiniCard
+              key={r.id}
               name={r.name}
               id={r.id}
               onBtnClick={handleSelectedShowRemove}
@@ -83,7 +111,9 @@ const Comparer = () => {
         })}
       </div>
 
-      <LineChart />
+      <div className="bg-black-300 w-2/3">
+        <MyChart tvshowdata={selectedShowsData}></MyChart>
+      </div>
     </>
   );
 };

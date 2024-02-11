@@ -13,9 +13,10 @@ const SearchAndSelect = ({
       if (searchResults.results.length > 0) {
         {
           return searchResults.results
-            .slice(0, 4)
+            .slice(0, 3)
             .map((r) => (
               <SearchResultCard
+                key={r.id}
                 givenID={r.id}
                 name={r.name}
                 image={r.poster_path}
@@ -36,7 +37,6 @@ const SearchAndSelect = ({
 
   return (
     <>
-      <h1>Search && Select</h1>
       <SearchForm onInputChange={onInputChange} />
       <>{displaySearchResults()}</>
     </>

@@ -11,7 +11,7 @@ const SearchResultCard = ({
 }) => {
   return (
     <div
-      className="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100"
+      className="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:min-w-[576px] md:max-w-xl hover:bg-gray-100  dark:bg-gray-900 dark:border-gray-800 dark:hover:bg-gray-700"
       data-ajdi={givenID}
       data-name={name}
       onClick={onSearchResultClick}

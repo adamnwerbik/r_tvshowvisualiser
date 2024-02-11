@@ -4,7 +4,7 @@ import Comparer from "./components/Comparer";
 
 const page = () => {
   return (
-    <div className="min-w-full bg-red-400 flex flex-col items-center">
+    <div className="min-w-full  flex flex-col items-center">
       <Info />
       <Comparer></Comparer>
     </div>

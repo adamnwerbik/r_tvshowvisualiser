@@ -6,32 +6,6 @@ import chartTrendline from "chartjs-plugin-trendline";
 
 // Setting up the labels for the x-axis of the chart
 
-// Setting up the data for the chart, including the labels and datasets
-const TVShowData = [
-  {
-    label: "The Wire", // Setting up the label for the dataset
-    data: [6, 4, 1, 8, 10, 2], // Setting up the data for the dataset
-    tension: 0.3,
-    showLine: true,
-    trendlineLinear: {
-      style: "rgb(43 ,66 ,255, 0.3)",
-      lineStyle: "dotted",
-      width: 2,
-    },
-  },
-  {
-    label: "The Sopranos", // Setting up the label for the dataset
-    data: [10, 9, 4, 7, 6], // Setting up the data for the dataset
-    tension: 0.3,
-    showLine: true,
-    trendlineLinear: {
-      style: "rgb(43 ,66 ,255, 0.3)",
-      lineStyle: "dotted",
-      width: 2,
-    },
-  },
-];
-
 const options = {
   elements: { line: { borderWidth: 2, borderDash: [1, 0] } },
   scales: {
@@ -44,7 +18,7 @@ const options = {
     },
     x: {
       title: { display: true, text: "Episode Number" },
-      min: 0,
+      min: 1,
       ticks: {
         // forces step size to be 50 units
         precision: 0,
@@ -53,16 +27,46 @@ const options = {
   },
 };
 
+function convertToChartableData(data) {
+  //Assumes data is {{id:{data:{fetchAllData(id)}}}, ...}
+  const chartableData = [];
+  data.forEach((e) => {});
+  data;
+
+  return chartableData;
+}
 // Defining the LineChart component
-const Chart = ({ tvshowdata }) => {
+const MyChart = ({ tvshowdata }) => {
   const TVShowDataTest = [
     {
       label: "XXXX", // Setting up the label for the dataset
-      data: [1, 2, 3], // Setting up the data for the dataset
+      data: [5, 2, 6, 4, null, 6.7, 9, 10, 6.7, 9, 10, 6.7, 9, 10], // Setting up the data for the dataset
       tension: 0.3,
       showLine: true,
       trendlineLinear: {
         style: "rgb(43 ,66 ,255, 0.3)",
+        lineStyle: "dotted",
+        width: 2,
+      },
+    },
+    {
+      label: "YYYYY", // Setting up the label for the dataset
+      data: [6.7, 9, 10, 5, null, 6, 4], // Setting up the data for the dataset
+      tension: 0.3,
+      showLine: true,
+      trendlineLinear: {
+        style: "rgb(43 ,66 ,25, 0.3)",
+        lineStyle: "dotted",
+        width: 2,
+      },
+    },
+    {
+      label: "AAAA", // Setting up the label for the dataset
+      data: [6.7, 5, null, 6, 4, 9, 10], // Setting up the data for the dataset
+      tension: 0.3,
+      showLine: true,
+      trendlineLinear: {
+        style: "rgb(43 ,66 ,215, 0.3)",
         lineStyle: "dotted",
         width: 2,
       },
@@ -76,9 +80,8 @@ const Chart = ({ tvshowdata }) => {
   return (
     <>
       <Scatter data={data} options={options} plugins={[chartTrendline]} />
-      //{console.log(tvshowdata)}
     </>
   );
 };
 
-export default Chart; // Exporting the LineChart component as the default export of the module
+export default MyChart; // Exporting the LineChart component as the default export of the module

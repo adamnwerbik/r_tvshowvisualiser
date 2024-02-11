@@ -3,7 +3,7 @@ import { useDebounce } from "use-debounce";
 import React from "react";
 import SearchAndSelect from "./SearchAndSelect";
 import { useState } from "react";
-import Chart from "./LineChart";
+import MyChart from "./Chart";
 import { useEffect } from "react";
 import collect from "collect.js";
 
@@ -64,7 +64,7 @@ const Comparer = () => {
   //change search results based on debounced query
   useEffect(() => {
     async function changeSearchResults() {
-      console.log(`myEffectJustRan: ${debouncedValue}`);
+      //console.log(`myEffectJustRan: ${debouncedValue}`);
       const results = await fetchResultsOfSearch(debouncedValue);
       setSearchResults(results);
       console.log(results);
@@ -106,7 +106,9 @@ const Comparer = () => {
         })}
       </div>
 
-      <Chart tvshowdata="[1, 2, 3, 4, 5]" />
+      <div className="bg-black-300 w-2/3">
+        <MyChart></MyChart>
+      </div>
     </>
   );
 };

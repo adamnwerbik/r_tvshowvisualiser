@@ -93,7 +93,6 @@ const Comparer = () => {
 
   return (
     <>
-      <h1>Comparer</h1>
       <SearchAndSelect
         onInputChange={onInputChange}
         searchResults={searchResults}
@@ -112,7 +111,7 @@ const Comparer = () => {
       </div>
 
       <div className="bg-black-300 w-2/3">
-        <MyChart></MyChart>
+        <MyChart tvshowdata={selectedShowsData}></MyChart>
       </div>
     </>
   );

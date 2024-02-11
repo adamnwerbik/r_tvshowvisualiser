@@ -45399,7 +45399,7 @@ const options = {
       min: 1,
       ticks: {
         // forces step size to be 50 units
-        stepSize: 1,
+        //stepSize: 1,
         precision: 0,
       },
     },
@@ -45412,9 +45412,15 @@ function convertToChartableData(data) {
   const keysOfData = Object.keys(data);
   keysOfData.forEach((tvShowID) => {
     const objToAdd = {
-      name: data[tvShowID.name],
+      label: data[tvShowID].name,
       tension: 0.3,
       showLine: true,
+      borderColor: null,
+      backgroundColor: null,
+      trendlineLinear: {
+        lineStyle: "dotted",
+        width: 2,
+      },
     };
     const episodesOfAShow = [];
     //for each TVshow
@@ -45424,55 +45430,28 @@ function convertToChartableData(data) {
         episodesOfAShow.push(episode.vote_average);
       });
     });
-    objToAdd[data] = episodesOfAShow;
+    objToAdd.data = episodesOfAShow;
     //
     chartableData.push(objToAdd);
   });
-
+  console.log("CHARTABLE DATA *************************");
+  console.log(chartableData);
   return chartableData;
 }
 // Defining the LineChart component
 const MyChart = ({ tvshowdata }) => {
-  const TVShowDataTest = [
-    {
-      label: "XXXX", // Setting up the label for the dataset
-      data: [5, 2, 6, 4, null, 6.7, 9, 10, 6.7, 9, 10, 6.7, 9, 10, 8], // Setting up the data for the dataset
-      tension: 0.3,
-      showLine: true,
-    },
-    {
-      label: "YYYYY", // Setting up the label for the dataset
-      data: [6.7, 9, 10, 5, null, 6, 4], // Setting up the data for the dataset
-      tension: 0.3,
-      showLine: true,
-      trendlineLinear: {
-        style: "rgb(43 ,66 ,25, 0.3)",
-        lineStyle: "dotted",
-        width: 2,
-      },
-    },
-    {
-      label: "AAAA", // Setting up the label for the dataset
-      data: [6.7, 5, null, 6, 4, 9, 10], // Setting up the data for the dataset
-      tension: 0.3,
-      showLine: true,
-      trendlineLinear: {
-        style: "rgb(43 ,66 ,215, 0.3)",
-        lineStyle: "dotted",
-        width: 2,
-      },
-    },
-  ];
-  const data = {
-    labels: [...Array(100).keys()].slice(1),
-    datasets: TVShowDataTest,
-  };
+  try {
+    const data = {
+      labels: [...Array(100).keys()].slice(1),
+      datasets: convertToChartableData(tvshowdata),
+    };
 
-  return (
-    <>
-      <Scatter data={data} options={options} plugins={[chartTrendline]} />
-    </>
-  );
+    return (
+      <>
+        <Scatter data={data} options={options} plugins={[chartTrendline]} />
+      </>
+    );
+  } catch (error) {}
 };
 
 export default MyChart; // Exporting the LineChart component as the default export of the module

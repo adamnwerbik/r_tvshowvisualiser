@@ -36,7 +36,6 @@ const SearchAndSelect = ({
 
   return (
     <>
-      <h1>Search && Select</h1>
       <SearchForm onInputChange={onInputChange} />
       <>{displaySearchResults()}</>
     </>

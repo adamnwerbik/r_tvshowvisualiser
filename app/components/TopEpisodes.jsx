@@ -24,7 +24,7 @@ const TopEpisodes = ({ data, showTop = 3 }) => {
       try {
         return sortedEps
           .slice(0, showTop)
-          .map((ep) => <EpisodeCard epObj={ep} />);
+          .map((ep) => <EpisodeCard epObj={ep} key={ep.name} />);
       } catch (error) {}
     }
     return (

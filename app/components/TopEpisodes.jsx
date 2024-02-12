@@ -31,7 +31,7 @@ const TopEpisodes = ({ data, showTop = 3 }) => {
       <div className="py-8">
         <h1 className="text-center">Top-rated episodes</h1>
         {console.log(sortedEpisodesArr)}
-        <div className="flex flex-col xl:flex-row">
+        <div className="flex flex-col lg:flex-row lg:min-w-3/12">
           {displaySearchResults(sortedEpisodesArr, showTop)}
         </div>
       </div>

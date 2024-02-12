@@ -15,6 +15,7 @@ import {
 } from "../serverActions/FetchingData";
 import MiniCard from "./MiniCard";
 import TopEpisodes from "./TopEpisodes";
+import { Video } from "./showCase.jsx/Video";
 
 const Comparer = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -122,6 +123,7 @@ const Comparer = () => {
           <TopEpisodes data={selectedShowsData} />
         </>
       )}
+      {!searchQuery && <Video />}
     </>
   );
 };

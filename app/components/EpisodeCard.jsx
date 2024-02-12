@@ -15,7 +15,7 @@ const EpisodeCard = (props) => {
         <h6 class="mb-2 text-l tracking-tight text-gray-900 dark:text-white">
           {`S${props.epObj.season_number}E${props.epObj.episode_number} - ⭐${props.epObj.vote_average}/10`}
         </h6>
-        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 line-clamp-4">
           {props.epObj.overview}
         </p>
       </div>

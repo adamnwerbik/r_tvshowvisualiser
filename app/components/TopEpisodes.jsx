@@ -28,10 +28,12 @@ const TopEpisodes = ({ data, showTop = 3 }) => {
       } catch (error) {}
     }
     return (
-      <div className="py-8 border border-black">
-        <h1 className="text-center">Top Episodes</h1>
+      <div className="py-8">
+        <h1 className="text-center">Top-rated episodes</h1>
         {console.log(sortedEpisodesArr)}
-        <>{displaySearchResults(sortedEpisodesArr, showTop)}</>
+        <div className="flex flex-col xl:flex-row">
+          {displaySearchResults(sortedEpisodesArr, showTop)}
+        </div>
       </div>
     );
   } catch (error) {

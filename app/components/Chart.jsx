@@ -45395,6 +45395,7 @@ const options = {
         display: true,
         text: "Episode Rating",
       },
+      max: 10,
     },
     x: {
       title: { display: true, text: "Episode Number" },

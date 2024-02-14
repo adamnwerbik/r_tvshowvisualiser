@@ -1,5 +1,4 @@
 import React from "react";
-import { Video } from "../components/showCase.jsx/Video";
 
 const page = () => {
   return (

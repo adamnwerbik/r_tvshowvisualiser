@@ -25,7 +25,6 @@ const Comparer = () => {
   const [selectedShowsData, setselectedShowsData] = useState({});
 
   function onInputChange(e) {
-    console.log("INPUT CHANGED");
     setSearchQuery(e.target.value);
   }
 
@@ -34,26 +33,19 @@ const Comparer = () => {
       const selectedShowsDataKeys = Object.keys(selectedShowsData);
 
       selectedShowsID.forEach(async (obj) => {
-        console.log(obj.name);
+        
         if (selectedShowsDataKeys.includes(obj.id)) {
-          console.log(`ID: ${obj.id} IS INCLUDED`);
           // do nothing
         } else {
-          console.log(`ID: ${obj.id} IS NOT INCLUDED`);
           //fetch data
           const fetchedData = await fetchAllSeasonsInfo(obj.id);
-          console.log("FETCHED DATA:");
-          console.log(fetchedData);
-          //selectedShowsData[`${obj.id}`] = {
-          //  data: await fetchAllSeasonsInfo(obj.id),
-          //};
+
           selectedShowsData[obj.id] = { name: obj.name, data: fetchedData };
         }
       });
     }
 
     fetchAndUpdateData();
-    console.log(selectedShowsData);
 
     //fetch data for each showID in this
   }, [selectedShowsID]);
@@ -72,10 +64,8 @@ const Comparer = () => {
   //change search results based on debounced query
   useEffect(() => {
     async function changeSearchResults() {
-      //console.log(`myEffectJustRan: ${debouncedValue}`);
       const results = await fetchResultsOfSearch(debouncedValue);
       setSearchResults(results);
-      //console.log(results);
     }
     changeSearchResults();
   }, [debouncedValue]);
@@ -83,7 +73,6 @@ const Comparer = () => {
   //FETCH DATA
   function handleSelectedShowRemove(e) {
     const showIDToRemove = e.currentTarget.dataset.id;
-    console.log(`showIDToRemove: ${showIDToRemove}: shows ${selectedShowsID}`);
     setSelectedShowsID(
       collect([...selectedShowsID])
         .where("id", "!==", showIDToRemove)

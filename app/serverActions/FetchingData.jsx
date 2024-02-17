@@ -65,7 +65,6 @@ export async function fetchSeasonInfoForASeries(id, season) {
     options
   );
   if (req.ok) {
-    console.log(`Checking season ${season} for ${id}`);
     const seriesInfo = await req.json();
     return seriesInfo;
   } else {

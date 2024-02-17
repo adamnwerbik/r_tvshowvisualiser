@@ -45437,8 +45437,7 @@ function convertToChartableData(data) {
     //
     chartableData.push(objToAdd);
   });
-  console.log("CHARTABLE DATA *************************");
-  console.log(chartableData);
+
   return chartableData;
 }
 // Defining the LineChart component
